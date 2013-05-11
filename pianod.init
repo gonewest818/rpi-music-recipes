@@ -38,10 +38,9 @@ case "$1" in
       USERFILE=${USERFILE:-/etc/pianod.userfile}
       ARGS="-i $STARTSCRIPT ${PORT:+-p $PORT} ${USERFILE:+-u $USERFILE} ${LOGGING:+$LOGGING} $ARGS"
 
-      #/bin/sleep 60
-      /usr/local/bin/ao_example > /tmp/ao_example.log 2>&1
-      #start-stop-daemon --start --background --quiet --exec $DAEMON -- $ARGS
-      $DAEMON $ARGS > /tmp/pianod.log 2>&1
+      #/usr/local/bin/ao_example > /tmp/ao_example.log 2>&1
+      #$DAEMON $ARGS > /tmp/pianod.log 2>&1
+      start-stop-daemon --start --background --quiet --exec $DAEMON -- $ARGS
       exitval=$?
 
       # Because we are using --background flag to force pianod into the BG,
