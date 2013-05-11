@@ -1,0 +1,97 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          wsgw
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts the WebSocket Gateway
+# Description:       wsgw is a generic WebSocket bridge service.  Primarily
+#                    developed to connect the pianod Pandora server to its
+#                    Web Client.  But can be used for any WebSocket to local
+#                    socket bridging.
+### END INIT INFO
+
+# Load functions
+. /lib/lsb/init-functions
+
+# Load config file if exists
+CONFIGFILE=/etc/wsgw.conf
+if [ -f "$CONFIGFILE" ]; then
+  . "$CONFIGFILE"
+fi
+
+# Use value set by config file or else defaults
+DAEMON=${DAEMON:-/usr/sbin/wsgw}
+test -f $DAEMON || exit 0
+
+case "$1" in
+  start)
+    log_daemon_msg "Starting WebSocket Gateway"
+
+    # Use params from config file or leave blank for default behavior
+    ARGS="${PORT:+-p $PORT} ${LOGGING:+$LOGGING} $SERVICES"
+
+    start-stop-daemon --start --background --quiet --exec $DAEMON -- $ARGS
+    exitval=$?
+
+    # Because we are using --background flag to force wsgw into the BG,
+    # we can't get the actual return value from wsgw, so 0 doesn't 
+    # necessarily mean it actually started
+    if [ $exitval = 0 ]; then
+      # Check whether it started, but it might be too early...
+      start-stop-daemon --status --exec $DAEMON
+      exitval=$?
+      
+      # If hasn't started yet, wait a little while...
+      if [ $exitval = 3 ]; then
+        sleep 0.5
+        start-stop-daemon --status --exec $DAEMON
+        exitval=$?
+      fi
+
+      # Wait a little more...
+      if [ $exitval = 3 ]; then
+        sleep 0.5
+        start-stop-daemon --status --exec $DAEMON
+        exitval=$?
+      fi
+
+      # Wait a little more...
+      if [ $exitval = 3 ]; then
+        sleep 0.5
+        start-stop-daemon --status --exec $DAEMON
+        exitval=$?
+      fi
+
+      # Waited long enough; report success or failure
+      log_end_msg $exitval
+    else
+      log_end_msg $exitval
+    fi
+    ;;
+
+  stop)
+    log_daemon_msg "Stopping WebSocket Gateway"
+    start-stop-daemon --stop --quiet --exec $DAEMON
+    log_end_msg $?
+    ;;
+
+  restart|reload|force-reload)
+    $0 stop
+    sleep 1
+    $0 start
+    ;;
+
+  status)
+    status_of_proc $DAEMON "wsgw"
+    ;;
+
+  *)
+    echo "Usage: /etc/init.d/wsgw {start|stop|reload|restart|force-reload}"
+    echo "Configuration loaded from $CONFIGFILE"
+    exit 1
+    ;;
+esac
+
+exit 0
