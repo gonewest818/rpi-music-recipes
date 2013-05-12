@@ -32,6 +32,8 @@ case "$1" in
     # Use params from config file or leave blank for default behavior
     ARGS="${PORT:+-p $PORT} ${LOGGING:+$LOGGING} $SERVICES"
 
+    # try to wait for wifi network to launch
+    /bin/sleep 60
     start-stop-daemon --start --background --quiet --exec $DAEMON -- $ARGS
     exitval=$?
 

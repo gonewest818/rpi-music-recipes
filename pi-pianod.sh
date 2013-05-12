@@ -33,9 +33,9 @@ update-rc.d pianod defaults
 
 #install wsgw
 cd /tmp
-curl http://deviousfish.com/Downloads/wsgw/wsgw-21.tar.gz -o wsgw-21.tar.gz
-tar xfz wsgw-21.tar.gz
-cd wsgw-21
+curl http://deviousfish.com/Downloads/wsgw/wsgw-23.tar.gz -o wsgw-23.tar.gz
+tar xfz wsgw-23.tar.gz
+cd wsgw-23
 ./configure && make && make install
 
 # wsgw init script
