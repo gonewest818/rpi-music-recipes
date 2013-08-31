@@ -23,9 +23,9 @@ chmod a+x /etc/init.d/wsgw
 
 # install pianod
 cd /tmp
-curl http://deviousfish.com/Downloads/pianod/pianod-144.tar.gz -o pianod-144.tar.gz
-tar xfz pianod-144.tar.gz
-cd pianod-144
+curl http://deviousfish.com/Downloads/pianod/pianod-149.tar.gz -o pianod-149.tar.gz
+tar xfz pianod-149.tar.gz
+cd pianod-149
 ./configure && make && make install
 
 # pianod init script
@@ -33,9 +33,9 @@ update-rc.d pianod defaults
 
 #install wsgw
 cd /tmp
-curl http://deviousfish.com/Downloads/wsgw/wsgw-23.tar.gz -o wsgw-23.tar.gz
-tar xfz wsgw-23.tar.gz
-cd wsgw-23
+curl http://deviousfish.com/Downloads/wsgw/wsgw-24.tar.gz -o wsgw-24.tar.gz
+tar xfz wsgw-24.tar.gz
+cd wsgw-24
 ./configure && make && make install
 
 # wsgw init script
