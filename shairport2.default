@@ -1,0 +1,27 @@
+# Shairport Daemon options
+#
+
+USER=pi
+GROUP=pi
+
+# Process' nice on start
+#NICE=0
+
+# File where log messages should be redirected.
+LOGFILE=/var/log/shairport.log
+ERRFILE=/var/log/shairport.err
+PIDFILE=/var/run/shairport.pid
+
+AP_NAME=AirPi
+
+OUTPUT=ao
+#OUTPUT_OPTS=
+
+MDNS=avahi
+
+# Change how many frames re required to start playing
+#BUFFER_FILL=220
+
+#RUN_ONSTART=
+#RUN_ONSTOP=
+
