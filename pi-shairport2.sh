@@ -23,5 +23,6 @@ chmod a+x /etc/init.d/shairport
 cp scripts/debian/init.d/shairport /etc/init.d/shairport
 cp scripts/debian/logrotate.d/shairport /etc/logrotate.d/shairport
 update-rc.d shairport defaults
+update-rc.d avahi-daemon defaults
 
 
