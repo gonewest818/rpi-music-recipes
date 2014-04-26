@@ -13,14 +13,14 @@ amixer cset numid=3 1
 
 # shairport package
 cd /tmp
-git clone https://github.com/abrasive/shairport.git
+git clone https://github.com/gonewest818/shairport.git
 cd shairport
 ./configure
 PREFIX=/usr make install
-chmod a+x /etc/init.d/shairport
 
 # init scripts
 cp scripts/debian/init.d/shairport /etc/init.d/shairport
+chmod a+x /etc/init.d/shairport
 cp scripts/debian/logrotate.d/shairport /etc/logrotate.d/shairport
 update-rc.d shairport defaults
 update-rc.d avahi-daemon defaults
