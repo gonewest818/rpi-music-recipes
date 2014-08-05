@@ -3,7 +3,7 @@
 {
 	daily
 	missingok
-	rotate 52
+	rotate 7
 	compress
 	delaycompress
 	notifempty

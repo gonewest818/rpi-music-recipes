@@ -14,7 +14,7 @@ amixer cset numid=3 1
 
 # shairport package
 cd /tmp
-git clone https://github.com/gonewest818/shairport.git
+git clone https://github.com/abrasive/shairport.git
 cd shairport
 ./configure
 PREFIX=/usr make install

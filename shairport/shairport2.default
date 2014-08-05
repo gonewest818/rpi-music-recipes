@@ -12,9 +12,10 @@ LOGFILE=/var/log/shairport.log
 ERRFILE=/var/log/shairport.err
 PIDFILE=/var/run/shairport.pid
 
+DAEMON=/usr/bin/shairport
 AP_NAME=AirPi
 
-OUTPUT=ao
+OUTPUT=alsa
 #OUTPUT_OPTS=
 
 MDNS=avahi
